@@ -1,0 +1,65 @@
+/*Program written by Tianyi Shi on 29th. January
+ * Assignment Light
+ */
+void setup() {
+pinMode(4,OUTPUT);//LED 1 connected to digitalpin4
+pinMode(5,OUTPUT);//LED 2 connected to digitalpin5
+pinMode(6,OUTPUT);//LED 3 connected to digitalpin6
+pinMode(7,OUTPUT);//LED 4 connected to digitalpin7
+pinMode(8,OUTPUT);//LED 5 connected to digitalpin8
+pinMode(9,OUTPUT);//LED 6 connected to digitalpin9
+pinMode(10,OUTPUT);//LED 7 connected to digitalpin10
+pinMode(11,OUTPUT);//LED 8 connected to digitalpin11
+pinMode(12,OUTPUT);//LED 9 connected to digitalpin12
+pinMode(13,OUTPUT);//LED 10 connected to digitalpin13
+Serial.begin(9600);//In setup
+
+}
+
+void loop() {
+  Serial.println(analogRead(5));//print out the number read by analogpin A5
+  if(analogRead(5) < 50){
+    //If the data read is under 50, turn on LED 4\5\6\7\10\11\12\13
+    digitalWrite(4,HIGH);
+    digitalWrite(5,HIGH);
+    digitalWrite(6,HIGH);
+    digitalWrite(7,HIGH);
+    digitalWrite(8,LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(11, HIGH);
+    digitalWrite(12, HIGH);  
+    digitalWrite(13, HIGH);        
+   }else if(analogRead(5) > 300){
+    //If the data read is above 300, turn on LED 5/9/13 and turn down 4/6/7/8/10/11/12
+    digitalWrite(4,LOW);
+    digitalWrite(5,HIGH);
+    digitalWrite(6,LOW);
+    digitalWrite(7,LOW);
+    digitalWrite(8,LOW);            
+    digitalWrite(9, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+    digitalWrite(12, LOW);  
+    digitalWrite(13, HIGH);         
+   }else{ 
+    /*If the data read is between 50 and 300, turn on LED 4/5/6,  turn down LED 10, then wait for 30 ms;
+    *turn on LED 11, turn down LED 4/5/7/8, then wait for another 30 ms; turn on LED 10/12, turn down LED 11/13 
+    */       
+    digitalWrite(4, HIGH);
+    digitalWrite(5,HIGH);
+    digitalWrite(6,HIGH);
+    digitalWrite(10,LOW);
+    delay(30);
+    digitalWrite(4,LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(11, HIGH);
+    digitalWrite(7,LOW);
+    digitalWrite(8,LOW);
+    delay(30);
+    digitalWrite(12, HIGH);  
+    digitalWrite(13, LOW);
+    digitalWrite(10,HIGH);
+    digitalWrite(11, LOW);
+  }
+}
